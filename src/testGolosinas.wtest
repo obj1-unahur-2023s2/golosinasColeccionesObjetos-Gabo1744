@@ -1,6 +1,177 @@
+import golosinas.*
 
-test "testX" {
+describe "test de Bombon"{
+	test "vale 5 pesos,pesa 15 gramos, es de frutilla y es libre de gluten"{
+		assert.equals(5,bombon.precio())
+		assert.equals(15,bombon.peso())
+		assert.equals("frutilla",bombon.sabor())
+		assert.that(bombon.esLibreDeGluten())
+	}
+	test "recibe 2 mordiscos y el peso queda en 7.8"{
+		bombon.recibirMordisco()
+		bombon.recibirMordisco()
+		assert.equals(7.8,bombon.peso())
+	}
+}
 
-	assert.that(true)
+describe "test de alfajor"{
+	test "vale 12 pesos,pesa 300 gramos, es de chocolate y NO es libre de gluten"{
+		assert.equals(12,alfajor.precio())
+		assert.equals(300,alfajor.peso())
+		assert.equals("chocolate",alfajor.sabor())
+		assert.notThat(alfajor.esLibreDeGluten())
+	}
+	test "recibe 2 mordiscos y el peso queda en 192"{
+		alfajor.recibirMordisco()
+		alfajor.recibirMordisco()
+		assert.equals(192,alfajor.peso())
+	}
+}
 
+describe "test de caramelo"{
+	test "vale 1 peso,pesa 5 gramos, es de frutilla y es libre de gluten"{
+		assert.equals(1,caramelo.precio())
+		assert.equals(5,caramelo.peso())
+		assert.equals("frutilla",caramelo.sabor())
+		assert.that(caramelo.esLibreDeGluten())
+	}
+	test "recibe 2 mordiscos y el peso queda en 3"{
+		caramelo.recibirMordisco()
+		caramelo.recibirMordisco()
+		assert.equals(3,caramelo.peso())
+	}
+}
+
+describe "test de chupetin"{
+	test "vale 2 pesos,pesa 7 gramos, es de naranja y es libre de gluten"{
+		assert.equals(2,chupetin.precio())
+		assert.equals(7,chupetin.peso())
+		assert.equals("naranja",chupetin.sabor())
+		assert.that(chupetin.esLibreDeGluten())
+	}
+	test "recibe 2 mordiscos y el peso queda en 5.67"{
+		chupetin.recibirMordisco()
+		chupetin.recibirMordisco()
+		assert.equals(5.67,chupetin.peso())
+	}
+}
+
+describe "test de oblea"{
+	test "vale 5 pesos,pesa 250 gramos, es de vainilla y NO es libre de gluten"{
+		assert.equals(5,oblea.precio())
+		assert.equals(250,oblea.peso())
+		assert.equals("vainilla",oblea.sabor())
+		assert.notThat(oblea.esLibreDeGluten())
+	}
+	test "recibe 2 mordiscos y el peso queda en 46.875"{
+		oblea.recibirMordisco()
+		oblea.recibirMordisco()
+		oblea.recibirMordisco()
+		assert.equals(46.875,oblea.peso())
+	}
+}
+
+describe "test de chocolatin"{
+	test "vale 20 pesos,pesa 40 gramos, es de chocolate y NO es libre de gluten"{
+		assert.equals(20,chocolatin.precio())
+		assert.equals(40,chocolatin.peso())
+		assert.equals("chocolate",chocolatin.sabor())
+		assert.notThat(chocolatin.esLibreDeGluten())
+	}
+	test "recibe 2 mordiscos y el peso queda en 36"{
+		chocolatin.recibirMordisco()
+		chocolatin.recibirMordisco()
+		assert.equals(36,chocolatin.peso())
+	}
+	/* 
+	test "vale 50 pesos,pesa 100 gramos, es de chocolate y NO es libre de gluten"{
+		chocolatin.pesoInicial(100)
+		assert.equals(50,chocolatin.precio())
+		assert.equals(100,chocolatin.peso())
+		assert.equals("chocolate",chocolatin.sabor())
+		assert.notThat(chocolatin.esLibreDeGluten())
+	}
+	test "recibe 2 mordiscos y el peso queda en 96"{
+		chocolatin.recibirMordisco()
+		chocolatin.recibirMordisco()
+		assert.equals(96,chocolatin.peso())
+	}*/
+}
+
+describe "test de tutti frutti"{
+	test "vale 7 pesos,pesa 5 gramos, y es libre de gluten"{
+		assert.equals(7,tuttiFrutti.precio())
+		assert.equals(5,tuttiFrutti.peso())
+		assert.that(tuttiFrutti.esLibreDeGluten())
+	}
+	test "vale 10 pesos,pesa 5 gramos, y NO es libre de gluten"{
+		tuttiFrutti.esLibreDeGluten(false)
+		assert.equals(10,tuttiFrutti.precio())
+		assert.equals(5,tuttiFrutti.peso())
+		assert.notThat(tuttiFrutti.esLibreDeGluten())
+	}
+	test "recibe 2 mordiscos,el sabor queda en chocolate y es libre de gluten"{
+		tuttiFrutti.recibirMordisco()
+		tuttiFrutti.recibirMordisco()
+		assert.equals("chocolate",tuttiFrutti.sabor())
+		assert.that(tuttiFrutti.esLibreDeGluten())
+	}
+	test "recibe 2 mordiscos,el sabor queda en chocolate y NO es libre de gluten"{
+		tuttiFrutti.esLibreDeGluten(false)
+		tuttiFrutti.recibirMordisco()
+		tuttiFrutti.recibirMordisco()
+		assert.equals("chocolate",tuttiFrutti.sabor())
+		assert.notThat(tuttiFrutti.esLibreDeGluten())
+	}
+}
+
+describe "Test de golosina bañiada"{
+	test "tiene a tutti frutti, vale 9, pesa 5, su sabor es frutilla y es libre de gluten"{
+		golosinaBaniada.golosinaBase(tuttiFrutti)
+		assert.equals(9,golosinaBaniada.precio())
+		assert.equals(9,golosinaBaniada.peso())
+		assert.equals("frutilla",golosinaBaniada.sabor())
+		assert.that(golosinaBaniada.esLibreDeGluten())
+	}
+	test "tiene a tutti frutti, vale 12, pesa 9, su sabor es frutilla y NO es libre de gluten"{
+		golosinaBaniada.golosinaBase(tuttiFrutti)
+		tuttiFrutti.esLibreDeGluten(false)
+		assert.equals(12,golosinaBaniada.precio())
+		assert.equals(9,golosinaBaniada.peso())
+		assert.equals("frutilla",golosinaBaniada.sabor())
+		assert.notThat(golosinaBaniada.esLibreDeGluten())
+	}
+	test "tiene a tutti frutti, recibe 2 mordiscos,el sabor queda en chocolate y su peso queda en 7"{
+		golosinaBaniada.golosinaBase(tuttiFrutti)
+		golosinaBaniada.recibirMordisco()
+		golosinaBaniada.recibirMordisco()
+		assert.equals("chocolate",golosinaBaniada.sabor())
+		assert.equals(7,golosinaBaniada.peso())
+	}
+	test "tiene a chocolatin, vale 22, pesa 44, su sabor es chocolate y NO es libre de gluten"{
+		golosinaBaniada.golosinaBase(chocolatin)
+		assert.equals(22,golosinaBaniada.precio())
+		assert.equals(44,golosinaBaniada.peso())
+		assert.equals("chocolate",golosinaBaniada.sabor())
+		assert.notThat(golosinaBaniada.esLibreDeGluten())
+	}
+	test "tiene a chocolatin, recibe 2 mordiscos y el peso queda en 40"{
+		golosinaBaniada.golosinaBase(chocolatin)
+		golosinaBaniada.recibirMordisco()
+		golosinaBaniada.recibirMordisco()
+		assert.equals(40,golosinaBaniada.peso())
+	}
+	test "tiene a chupetin, vale 4, pesa 9, su sabor es naranja y es libre de gluten"{
+		golosinaBaniada.golosinaBase(chupetin)
+		assert.equals(4,golosinaBaniada.precio())
+		assert.equals(9,golosinaBaniada.peso())
+		assert.equals("naranja",golosinaBaniada.sabor())
+		assert.that(golosinaBaniada.esLibreDeGluten())
+	}
+	test "tiene a chupetin, recibe 2 mordiscos y el peso queda en 7"{
+		golosinaBaniada.golosinaBase(chocolatin)
+		golosinaBaniada.recibirMordisco()
+		golosinaBaniada.recibirMordisco()
+		assert.equals(7,golosinaBaniada.peso())
+	}
 }

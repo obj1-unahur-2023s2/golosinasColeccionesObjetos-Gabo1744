@@ -1,6 +1,75 @@
+import mariano.*
+import golosinas.*
 
-test "testX" {
-
-	assert.that(true)
-
+describe "test de Mariano"{
+	test "cantidad de golosinas igual a 3"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		assert.equals(3,mariano.cantidadDeGolosinas())
+	}
+	test "tiene el chocolatin, el caramelo pero no tiene el bombon"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		mariano.desechar(bombon)
+		assert.that(mariano.tieneLaGolosina(chocolatin))
+		assert.that(mariano.tieneLaGolosina(caramelo))
+		assert.notThat(mariano.tieneLaGolosina(bombon))
+	}
+	test "le da un mordisco a cada golosina"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		mariano.probarGolosinas()
+		assert.equals(53,chocolatin.peso() + caramelo.peso() + bombon.peso())
+	}
+	test "hay al menos una golosina libre de gluten"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		assert.that(mariano.hayGolosinaSinTACC())
+	}
+	test "No hay precios cuidados"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		assert.notThat(mariano.preciosCuidados())
+	}
+	test "la primera golosina sabor frutilla es el caramelo"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		assert.equals(caramelo,mariano.golosinaDeSabor("frutilla"))
+	}
+	test "las golosinas son de sabor chocolatey frutilla"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		assert.equals(#{"chocolate","frutilla"},mariano.sabores())
+	}
+	test "La golosina mas cara que tiene es el chocolatin"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		assert.equals(chocolatin,mariano.golosinaMasCara())
+	}
+	test "La bolsa de golosinas pesa 60 gramos"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		assert.equals(60,mariano.pesoGolosinas())
+	}
+	test "De las golosinas deseadas le falta el alfajor y el chupetin"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		assert.equals(#{alfajor,chupetin},mariano.golosinasFaltantes(#{alfajor, bombon, chocolatin, chupetin}))
+	}
+	test "De los gustos deseados le falta el melon y la vainilla"{
+		mariano.comprar(chocolatin)
+		mariano.comprar(caramelo)
+		mariano.comprar(bombon)
+		assert.equals(#{"melón","vainilla"},mariano.gustosFaltantes(#{"melón", "chocolate", "frutilla" , "vainilla"}))
+	}
 }

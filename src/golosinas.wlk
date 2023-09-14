@@ -1,79 +1,118 @@
 object bombon {
-	const caracteristicas =[5,15,"frutilla",false]
+	var peso = 15
 	
-	method precio() = caracteristicas.get(0)
-	method peso() = caracteristicas.get(1)
-	method sabor() = caracteristicas.get(2)
-	method esLibreDeGluten() = caracteristicas.get(3)
+	method precio() = 5
+	method peso() = peso
+	method sabor() = "frutilla"
+	method esLibreDeGluten() = true
 	
-	/*method recibirMordisco(){
-		caracteristicas.at(0) = (self.peso() * 0.8) -1
-	}*/
+	method recibirMordisco(){
+		peso = 0.max((peso * 0.8) - 1)
+	}
 }
 
 object alfajor {
-	const caracteristicas =[12,300,"chocolate",false]
+	var peso = 300
 	
-	method precio() = caracteristicas.get(0)
-	method peso() = caracteristicas.get(1)
-	method sabor() = caracteristicas.get(2)
-	method esLibreDeGluten() = caracteristicas.get(3)
+	method precio() = 12
+	method peso() = peso
+	method sabor() = "chocolate"
+	method esLibreDeGluten() = false
+	
+	method recibirMordisco(){
+		peso = (peso * 0.8)
+	}
 }
 
 object caramelo {
-	const caracteristicas =[1,5,"frutilla",false]
+	var peso = 5
 	
-	method precio() = caracteristicas.get(0)
-	method peso() = caracteristicas.get(1)
-	method sabor() = caracteristicas.get(2)
-	method esLibreDeGluten() = caracteristicas.get(3)
+	method precio() = 1
+	method peso() = peso
+	method sabor() = "frutilla"
+	method esLibreDeGluten() = true
+	
+	method recibirMordisco(){
+		peso = 0.max(peso - 1)
+	}
 }
 
 object chupetin {
-	const caracteristicas =[2,7,"naranja",false]
+	var peso = 7
 	
-	method precio() = caracteristicas.get(0)
-	method peso() = caracteristicas.get(1)
-	method sabor() = caracteristicas.get(2)
-	method esLibreDeGluten() = caracteristicas.get(3)
+	method precio() = 2
+	method peso() = peso
+	method sabor() = "naranja"
+	method esLibreDeGluten() = true
+	
+	method recibirMordisco(){
+		peso = 2.max(peso * 0.9)
+	}
 }
 
 object oblea {
-	const caracteristicas =[5,250,"vainilla",true]
+	var peso = 250
 	
-	method precio() = caracteristicas.get(0)
-	method peso() = caracteristicas.get(1)
-	method sabor() = caracteristicas.get(2)
-	method esLibreDeGluten() = caracteristicas.get(3)
+	method precio() = 5
+	method peso() = peso
+	method sabor() = "vainilla"
+	method esLibreDeGluten() = false
+	
+	method recibirMordisco(){
+		if (peso > 70){
+			peso = peso * 0.5
+		}else{
+			peso = peso * 0.75
+		}
+	}
 }
 
 object chocolatin {
-	const caracteristicas =[0.5,"","chocolate",true]
+	var peso = 40
+	const precio = peso * 0.5
 	
-	method precio() = caracteristicas.get(0)
-	method peso() = caracteristicas.get(1)
-	method sabor() = caracteristicas.get(2)
-	method esLibreDeGluten() = caracteristicas.get(3)
+	method peso() = peso
+	method precio() = precio
+	method sabor() = "chocolate"
+	method esLibreDeGluten() = false
+	
+	method recibirMordisco(){
+		peso = 0.max(peso - 2)
+	}
 }
 
 object golosinaBaniada {
-	var property golosina 
-	const caracteristicas =[golosina.precio()+2,golosina.peso()+4,golosina.gusto(),golosina.esLibreDeGluten()]
+	var golosinaBase 
+	var peso = 4
 	
-	method precio() = caracteristicas.get(0)
-	method peso() = caracteristicas.get(1)
-	method sabor() = caracteristicas.get(2)
-	method esLibreDeGluten() = caracteristicas.get(3)
+	method precio() = golosinaBase.precio() + 2
+	method peso() = golosinaBase.peso() + peso
+	method sabor() = golosinaBase.sabor()
+	method esLibreDeGluten() = golosinaBase.esLibreDeGluten()
+	
+	method golosinaBase(golosina){
+		golosinaBase = golosina
+	}
+	method recibirMordisco(){
+		golosinaBase.recibirMordisco()
+		peso = 0.max(peso - 2)
+	}
 }
 
 object tuttiFrutti {
-	var esLibreDeGluten
-	var precio
-	const caracteristicas =[precio,5,"chocolate",esLibreDeGluten]
+	var esLibreDeGluten = true
+	const sabor = ["frutilla","naranja","chocolate"]
+	var contador = 0
 	
-	method precio() = caracteristicas.get(0)
-	method peso() = caracteristicas.get(1)
-	method sabor() = caracteristicas.get(2)
-	method esLibreDeGluten() = caracteristicas.get(3)
+	method precio() = if(esLibreDeGluten){7}else{10}
+	method peso() = 5
+	method sabor() = sabor.get(contador % sabor.size())
+	method esLibreDeGluten() = esLibreDeGluten
+	
+	method esLibreDeGluten(bolean){
+		esLibreDeGluten = bolean
+	}
+	method recibirMordisco(){
+		contador ++
+	}
 }
-
